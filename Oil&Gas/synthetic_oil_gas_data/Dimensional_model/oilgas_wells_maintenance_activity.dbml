@@ -1,0 +1,72 @@
+Table oilgas_wells_maintenance_activity_fact {
+  well_id INT
+  equipment_failure_id INT
+  equipment_failure_severity_id INT
+  equipment_failure_type_id INT
+  maintenance_activity_id INT
+  maintenance_technician_name_id INT
+  failure_downtime_hrs DECIMAL
+  failure_repair_cost_usd DECIMAL
+  failure_response_time_hrs DECIMAL
+  maintenance_event_date DATE
+}
+
+Table oilgas_wells_dim {
+  well_id INT
+  completion_date DATE
+  depth_m DECIMAL
+  field_id INT
+  location_lat DECIMAL
+  location_lon DECIMAL
+  spud_date DATE
+  status VARCHAR
+  well_type VARCHAR
+}
+
+Table oilgas_equipment_failure_severity_dim {
+  equipment_failure_severity_id INT
+  equipment_failure_severity_desc VARCHAR
+}
+
+Table oilgas_equipment_failure_type_dim {
+  equipment_failure_type_id INT
+  equipment_failure_type_desc VARCHAR
+}
+
+Table oilgas_maintenance_activity_dim {
+  maintenance_activity_id INT
+  maintenance_activity VARCHAR
+}
+
+
+Table oilgas_maintenance_technician_dim {
+  maintenance_technician_name_id INT
+  maintenance_technician_name VARCHAR
+}
+
+
+Table time_dim {
+  date_key INTEGER [primary key]
+  date_value DATE [not null]
+  full_date_string TEXT [not null]
+  year INTEGER [not null]
+  quarter INTEGER [not null]
+  month INTEGER [not null]
+  month_name_full TEXT [not null]
+  month_name_short TEXT [not null]
+  day_of_week INTEGER [not null]
+  day_of_week_name TEXT [not null]
+  day_of_month INTEGER [not null]
+  day_of_year INTEGER [not null]
+  week_of_year INTEGER [not null]
+  is_weekend BOOLEAN [not null]
+}
+
+
+Ref: oilgas_wells_maintenance_activity_fact.well_id > oilgas_wells_dim.well_id
+Ref: oilgas_wells_maintenance_activity_fact.equipment_failure_severity_id > oilgas_equipment_failure_severity_dim.equipment_failure_severity_id
+Ref: oilgas_wells_maintenance_activity_fact.equipment_failure_type_id > oilgas_equipment_failure_type_dim.equipment_failure_type_id
+Ref: oilgas_wells_maintenance_activity_fact.maintenance_technician_name_id > oilgas_maintenance_technician_dim.maintenance_technician_name_id
+Ref: oilgas_wells_maintenance_activity_fact.maintenance_activity_id > oilgas_maintenance_activity_dim.maintenance_activity_id
+Ref: oilgas_wells_maintenance_activity_fact.maintenance_event_date > time_dim.full_date_string
+

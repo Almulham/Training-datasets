@@ -1,0 +1,58 @@
+Table oilgas_wells_production_activity_fact {
+  well_id int 
+  transporter_id INT
+  shipment_destination_id INT
+  transport_shipment_id INT
+  production_choke_size VARCHAR
+  production_date DATE
+  production_gas_mcf DECIMAL
+  production_oil_bbl DECIMAL
+  production_tubing_pressure_psi DECIMAL
+  production_water_bbl DECIMAL
+  transport_quantity_bbl DECIMAL
+}
+
+Table oilgas_wells_dim {
+  well_id INT
+  completion_date DATE
+  depth_m DECIMAL
+  field_id INT
+  location_lat DECIMAL
+  location_lon DECIMAL
+  spud_date DATE
+  status VARCHAR
+  well_type VARCHAR
+}
+
+Table oilgas_shipment_transporter_dim {
+  transporter_id INT
+  shipment_transporter_desc VARCHAR
+}
+
+Table oilgas_shipment_destination_dim {
+  shipment_destination_id INT
+  shipment_destination_desc VARCHAR
+}
+
+
+Table time_dim {
+  date_key INTEGER [primary key]
+  date_value DATE [not null]
+  full_date_string TEXT [not null]
+  year INTEGER [not null]
+  quarter INTEGER [not null]
+  month INTEGER [not null]
+  month_name_full TEXT [not null]
+  month_name_short TEXT [not null]
+  day_of_week INTEGER [not null]
+  day_of_week_name TEXT [not null]
+  day_of_month INTEGER [not null]
+  day_of_year INTEGER [not null]
+  week_of_year INTEGER [not null]
+  is_weekend BOOLEAN [not null]
+}
+
+Ref: oilgas_wells_production_activity_fact.well_id > oilgas_wells_dim.well_id
+Ref: oilgas_wells_production_activity_fact.transporter_id > oilgas_shipment_transporter_dim.transporter_id
+Ref: oilgas_wells_production_activity_fact.shipment_destination_id > oilgas_shipment_destination_dim.shipment_destination_id
+Ref: oilgas_wells_production_activity_fact.shipment_destination_id > time_dim.full_date_string

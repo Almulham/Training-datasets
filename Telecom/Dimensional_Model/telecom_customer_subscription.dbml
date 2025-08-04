@@ -1,0 +1,75 @@
+// Based on the provided views, this diagram represents a star schema for a telecom data model.
+
+Table telecom_customer_dim {
+  customer_id int [pk]
+  first_name varchar
+  last_name varchar
+  city varchar
+}
+
+Table telecom_plan_dim {
+  plan_id int [pk]
+  plan_name varchar
+}
+
+Table telecom_usage_type_dim {
+  usage_type_id int [pk]
+  usage_type varchar
+  usage_unit varchar
+}
+
+Table telecom_customer_subscription_fact as TSF {
+  // Fact Table Grain: subscription_id
+  subscription_id int [pk]
+  customer_id int
+  plan_id int
+  usage_type_id int
+  
+  // Measures and Attributes
+  start_date date
+  is_active boolean
+  signup_date date
+  monthly_cost_usd float
+  data_gb float
+  voice_minutes int
+  sms_count int
+  bill_id int
+  bill_date date
+  amount_due_usd float
+  is_paid boolean
+  payment_date date
+  usage_id int
+  usage_date date
+  usage_value float
+  cost_usd float
+}
+
+// Time Dimension to support time-based analysis
+Table time_dim {
+  date_key INTEGER [primary key]
+  date_value DATE [not null]
+  full_date_string TEXT [not null]
+  year INTEGER [not null]
+  quarter INTEGER [not null]
+  month INTEGER [not null]
+  month_name_full TEXT [not null]
+  month_name_short TEXT [not null]
+  day_of_week INTEGER [not null]
+  day_of_week_name TEXT [not null]
+  day_of_month INTEGER [not null]
+  day_of_year INTEGER [not null]
+  week_of_year INTEGER [not null]
+  is_weekend BOOLEAN [not null]
+}
+
+// Relationships based on the fact view's joins
+Ref: telecom_customer_subscription_fact.customer_id > telecom_customer_dim.customer_id
+Ref: telecom_customer_subscription_fact.plan_id > telecom_plan_dim.plan_id
+Ref: telecom_customer_subscription_fact.usage_type_id > telecom_usage_type_dim.usage_type_id
+
+// Relationships to the newly added Time Dimension
+Ref: telecom_customer_subscription_fact.start_date > time_dim.date_key
+Ref: telecom_customer_subscription_fact.signup_date > time_dim.date_key
+Ref: telecom_customer_subscription_fact.bill_date > time_dim.date_key
+Ref: telecom_customer_subscription_fact.payment_date > time_dim.date_key
+Ref: telecom_customer_subscription_fact.usage_date > time_dim.date_key

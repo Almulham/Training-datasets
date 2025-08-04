@@ -1,0 +1,55 @@
+Table oilgas_drilling_events_fact {
+  well_id INT
+  rig_id INT
+  drilling_event_type_id INT
+  drilling_duration_days INT
+  end_date DATE
+  start_date DATE
+}
+
+
+Table oilgas_wells_dim {
+  well_id INT
+  completion_date DATE
+  depth_m DECIMAL
+  field_id INT
+  location_lat DECIMAL
+  location_lon DECIMAL
+  spud_date DATE
+  status VARCHAR
+  well_type VARCHAR
+}
+
+Table oilgas_rigs_dim {
+  rig_id int
+  type varchar
+  contractor varchar
+  capacity_unit varchar
+  capacity int
+  status varchar
+  last_inspection_date date
+}
+
+
+
+Table time_dim {
+  date_key INTEGER [primary key]
+  date_value DATE [not null]
+  full_date_string TEXT [not null]
+  year INTEGER [not null]
+  quarter INTEGER [not null]
+  month INTEGER [not null]
+  month_name_full TEXT [not null]
+  month_name_short TEXT [not null]
+  day_of_week INTEGER [not null]
+  day_of_week_name TEXT [not null]
+  day_of_month INTEGER [not null]
+  day_of_year INTEGER [not null]
+  week_of_year INTEGER [not null]
+  is_weekend BOOLEAN [not null]
+}
+
+
+Ref: oilgas_drilling_events_fact.well_id > oilgas_wells_dim.well_id
+Ref: oilgas_drilling_events_fact.rig_id > oilgas_rigs_dim.rig_id
+Ref: oilgas_drilling_events_fact.end_date > time_dim.full_date_string
