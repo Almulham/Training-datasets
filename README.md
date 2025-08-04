@@ -43,10 +43,8 @@ A `data_dictionary.md` file is included in each industry folder. This document p
 
 To use these datasets, you can:
 
-1.  **Clone the repository:** `git clone https://github.com/your-username/training-datasets.git`
-2.  **Load the data:** Import the `.csv` files into your preferred database (e.g., PostgreSQL, MySQL, SQL Server) using a tool like `psql`, `mysql`, or a data loading library in Python.
-3.  **Explore the data:** Use the provided data dictionary to understand the schema and relationships.
-4.  **Practice:** Write queries, build dashboards, and experiment with different modeling techniques.
+1.  **Clone the repository:**
+2.  **Load the data:** Import the `.csv` files into your preferred database or a data loading library in Python.
 
 ## Contributing
 
