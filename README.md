@@ -12,24 +12,6 @@ The primary goal of this project is to provide a standardized, high-quality reso
   * **Business Intelligence:** Creating reports and dashboards from a modeled data warehouse.
   * **Performance Tuning:** Working with large datasets to understand query performance.
 
-## Repository Structure
-
-The repository is organized by industry. Each industry folder contains a complete, self-contained dataset with the following structure:
-
-```
-/training-datasets
-├── /logistics
-│   ├── /raw_data
-│   │   ├── shipments.csv
-│   │   ├── routes.csv
-│   │   └── ...
-│   ├── /dimensional_model
-│   │   ├── dim_shipment.csv
-│   │   ├── fact_delivery.csv
-│   │   └── ...
-│   └── data_dictionary.md
-└── ... (other industries)
-```
 
 ## Datasets
 
@@ -44,7 +26,7 @@ Currently available datasets:
 | Industry | Description | Model Type |
 | :--- | :--- | :--- |
 | **Logistics** | Simulates supply chain operations, including shipments, routes, and warehouses. | Star Schema |
-| **Oil & Gas** | Models exploration and production data, including well performance and operational metrics. | Snowflake Schema |
+| **Oil & Gas** | Models exploration and production data, including well performance and operational metrics. | Star Schema |
 | **Telecom** | Tracks customer usage, billing, and network performance data. | Star Schema |
 
 ## Data Dictionary
