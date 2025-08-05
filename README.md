@@ -34,9 +34,7 @@ Currently available datasets:
 A `data_dictionary.md` file is included in each industry folder. This document provides essential metadata for all tables and columns, including:
 
   * Table and column names
-  * Data types
   * Descriptions of the data
-  * Relationships between tables (e.g., primary and foreign keys)
   * Sample values
 
 ## How to Use
