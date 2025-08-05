@@ -54,7 +54,3 @@ We welcome contributions\! If you have a realistic dataset for a new industry or
 4.  A complete `data_dictionary.md` file.
 
 Please review the existing datasets to ensure your contribution follows the established format.
-
-## License
-
-This project is licensed under the [MIT License](https://www.google.com/search?q=LICENSE).
